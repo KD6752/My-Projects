@@ -1,0 +1,30 @@
+{
+	"Emp_id":"101",
+	"Emp_name":"Rick",
+	"Emp_address": "Newyork",
+	"Emp_dept":"D001"
+	},
+	{
+	"Emp_id":"102",
+	"Emp_name":"Christine",
+	"Emp_address": "Idaho",
+	"Emp_dept":"D890"
+	},
+	{
+	"Emp_id":"105",
+	"Emp_name":"Glen",
+	"Emp_address": "Texas",
+	"Emp_dept":"D900"
+	},
+	{
+	"Emp_id":"103",
+	"Emp_name":"Jean",
+	"Emp_address": "Maine",
+	"Emp_dept":"D890"
+	},
+	{"Emp_id":"104",
+	"Emp_name":"Claris",
+	"Emp_address": "Verginia",
+	"Emp_dept":"D800"
+	}
+]
