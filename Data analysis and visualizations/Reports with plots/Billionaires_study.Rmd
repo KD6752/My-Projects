@@ -1,0 +1,83 @@
+---
+title: "World's Billionaires"
+author: "Kokil Dhakal"
+date: "`r Sys.Date()`"
+output:
+  pdf_document:
+    latex_engine: lualatex
+---
+
+```{r setup, include=FALSE}
+library(tidyverse)
+library(plotly)
+library(kableExtra)
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+For this project, I obtained the current and updated dataset from [kaggle](https://www.kaggle.com/datasets/nelgiriyewithana/billionaires-statistics-dataset).After some cleaning and preprocessing,I made some plotting which show interesting facts about Billionaires.
+
+```{r echo=FALSE, fig.height=7, fig.width=12, message=FALSE, warning=FALSE}
+df <- read.csv("/Users/kokildhakal/Downloads/Billionaires Statistics Dataset.csv")
+
+billionairs <- df %>% select(personName,country,category,industries,organization,gender,finalWorth)
+billion.country <- data.frame(sort(table(billionairs$country),decreasing = TRUE))
+plot_ly(x=billion.country$Var1,y=billion.country$Freq,type = "bar",color = rainbow(79),showlegends =FALSE) %>% 
+  add_text(text=~billion.country$Freq, hoverinfo='none', textposition = 'top', showlegend = FALSE, 
+        textfont=list(size=5, color="black")) %>% 
+  layout(xaxis = list(title = "Country"),
+                      yaxis = list(title = "Number of Billionaires"),
+         title="Number of Billionaires in Each country")
+```
+
+# -------------------------------------------------------------------------------
+
+```{r echo=FALSE, fig.height=7, fig.width=12, message=FALSE, warning=FALSE}
+
+billion.person <- billionairs %>% select(personName,finalWorth) %>% top_n(15,wt = finalWorth) %>% arrange()
+billion.person$personName <- factor(billion.person$personName, levels = unique(billion.person$personName)[order(billion.person$finalWorth, decreasing = TRUE)])
+plot_ly(data = billion.person, x=~personName,y=~finalWorth,type = "bar",color = rainbow(15),showlegends=FALSE) %>% 
+  
+  add_text(text=~finalWorth/1000, hoverinfo='none', textposition = 'top', showlegend = FALSE, 
+        textfont=list(size=12, color="black")) %>% 
+  layout(xaxis = list(title = "Billionaires"),
+                      yaxis = list(title = "Worth in Billions"),
+         title="Top 15 Billionaires and their Worth")
+
+
+```
+
+# -------------------------------------------------------------------------------
+
+## Table Top 20 Billionaires and their business type
+```{r echo=FALSE, fig.height=7, fig.width=12, message=FALSE, warning=FALSE, paged.print=TRUE}
+person.org <- billionairs %>% select(Billionaires=personName,Category=category,Worth = finalWorth) %>% top_n(20,Worth)
+kable(person.org,align = "c",label = "Top 15 Billionaires and their business type")
+```
+
+# -------------------------------------------------------------------------------
+
+```{r echo=FALSE, fig.height=6, fig.width=12}
+gender.billionaire <- table(billionairs$gender)
+gender.df <- data.frame(gender.billionaire)
+#pie(gender.billionaire,labels = c("Female","Male"),main = "Gender distribution in world's Billionaires",col = c("lightpink","lightblue"))
+
+plot_ly(data = gender.df,values=~gender.df$Freq,labels=~c("Female","Male"),type = "pie",colors  = c("lightpink","lightblue"),textinfo=("value")) %>% 
+  layout(title="Gender distiribution in World's Billionaires")
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
