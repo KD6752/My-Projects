@@ -1,0 +1,6 @@
+2023-Dec-23-21:03:12 : Starting the ETL process
+2023-Dec-23-21:03:12 : Data extraction complete,Starting The Tranformation Process
+2023-Dec-23-21:03:12 : Data Transformation Compolete, loading to csv
+2023-Dec-23-21:03:12 : Data save as csv. data loading to db started
+2023-Dec-23-21:03:12 : data loaded to database,query process started
+2023-Dec-23-21:03:12 : Process complete

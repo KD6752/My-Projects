@@ -1,0 +1,1 @@
+This is a project about ETL process that involved extracting data by web scrapping, tranforming accoringingly to appropriate units,and loading  to database.
